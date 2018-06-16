@@ -1,0 +1,54 @@
+Federal Office of Meteorology and Climatology, MeteoSwiss
+Operation Center 1
+Postfach 257
+8058 Zürich-Flughafen
+
+stn yyyyMMddHHmm
+
+stn Station abbreviation
+y   Year
+M   Month
+d   Day
+H   Hour
+m   Minute
+
+Times in UTC:            0040 UTC = 02:40 Summer time
+                                  = 01:40 Winter time
+
+Observation interval for hourly values, unless otherwise indicated in the parameter descrip-tion: HH  = (HH-1):41 - HH:40
+Example: 13 = observation period 12:41 to 13:40 
+
+Missing values are marked with '-'
+
+Quality information: The key to quality information can be found under: https://gate.meteoswiss.ch/idaweb/text/datenqualitaet_legende_de.pdf
+
+ 
+
+
+
+Stations
+--------
+stn       Name                                 Parameter        Data source                                        Longitude/Latitude       Coordinates [km] Elevation [m]
+BOZHFH    Flughafen Zürich                     tre000s0         Flughafen Zürich                                   8°32'/47°29'             682986/259328    420
+BOZHFH    Flughafen Zürich                     ods000z0         unknown                                            8°32'/47°29'             682986/259328    420
+BOZHFH    Flughafen Zürich                     gre000z0         unknown                                            8°32'/47°29'             682986/259328    420
+BOZHFH    Flughafen Zürich                     rre150z0         unknown                                            8°32'/47°29'             682986/259328    420
+BOZHFH    Flughafen Zürich                     sre000z0         unknown                                            8°32'/47°29'             682986/259328    420
+BOZHFH    Flughafen Zürich                     nto000sw         unknown                                            8°32'/47°29'             682986/259328    420
+KLO       Zürich / Kloten                      tre000s0         unknown                                            8°32'/47°29'             682710/259338    426
+KLO       Zürich / Kloten                      ods000z0         MeteoSchweiz                                       8°32'/47°29'             682710/259338    426
+KLO       Zürich / Kloten                      gre000z0         MeteoSchweiz                                       8°32'/47°29'             682710/259338    426
+KLO       Zürich / Kloten                      rre150z0         MeteoSchweiz                                       8°32'/47°29'             682710/259338    426
+KLO       Zürich / Kloten                      sre000z0         MeteoSchweiz                                       8°32'/47°29'             682710/259338    426
+KLO       Zürich / Kloten                      nto000sw         MeteoSchweiz                                       8°32'/47°29'             682710/259338    426
+
+Parameter
+---------
+          Unit                                 Description
+tre000s0  °C                                   null
+ods000z0  W/m²                                 null
+gre000z0  W/m²                                 Global radiation; ten minutes mean
+rre150z0  mm                                   Precipitation; ten minutes total
+sre000z0  min                                  Sunshine duration; ten minutes total
+nto000sw  octas                                SYNOP: total cloud cover (WMO 2700)
+
