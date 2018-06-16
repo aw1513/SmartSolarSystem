@@ -19,7 +19,7 @@ def func_Surplus_day(t):
 
     #t is starting time: the index of the bin where it starts to be a certain value
     #array i
-    #print(type(t[0]))
+    print((t[0]))
     before_t0 = np.zeros(int(t[0]))
     during_appliance = np.array([0.5,0.5,0.5])
     after_t0plus3 = np.zeros(24-int(t[0])-3)
@@ -28,13 +28,16 @@ def func_Surplus_day(t):
     
     o_1 = np.append(before_t0,during_appliance) #,after_t0plus3)
     optimizable_appliance = np.append( o_1 ,after_t0plus3)
-    print(t[0])
-    print(optimizable_appliance)
+    #print(t[0])
+    #print(optimizable_appliance)
     
-    surplus = energyproduction - energyconsumption - optimizable_appliance
+    #surplus = energyproduction - energyconsumption - optimizable_appliance
+    surplus = energyproduction - energyconsumption- optimizable_appliance
+    #print(abs(surplus))
+    print(sum(abs(surplus)))
     
-    return sum(surplus)
-time_guess = np.array([20])
+    return sum(abs(surplus))
+time_guess = np.array([3])
 
 #res = optimize.minimize(func_Surplus_day, time_guess, method='nelder-mead',  options={'xtol': 1e-8, 'disp': True})
 res = optimize.minimize(func_Surplus_day, time_guess, method='nelder-mead',  options={'xtol': 0.5, 'disp': True})
