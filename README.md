@@ -8,7 +8,7 @@ To accelerate and facilitate the integration of renewables it is therefore indis
 We combine machine learning, an optimisation algorithm and the Ethereum blockchain to create a smart home with an incentive to minimise the strain on the electrical grid. This empowers the smart home owners to optimise their self-consumption with a smart optimiser taking into account state-of-the art predictions of the solar energy production in combination with a token-based reward system. At the same time, the feed-in to the electrical grid is minimised - as a result, the SmartSolarSystem helps reduce the stress on the grid.
 
 
-*Description of the system:*
+## Description of the system:
 The SmartSolarSystem has a fully decentralised front-end and back-end with the following components:
 - Based on public weather forcasts and learned features about the individual system, the machine learning component predicts an hourly solar energy production for the next day. It makes use of a random forest implemenation.
 - The optimiser is an algorithm that minimises the surplus energy for the next 24h, which is equivalent to the difference between the predicted production and the self-consumption. A variety of electrical appliances are implemented, for example household devices and storage batteries. The algorithm will learn about the house owners base consumption as well as incorporate IoT information about the devices.
