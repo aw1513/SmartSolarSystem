@@ -40,30 +40,15 @@ washing_machine = Appliance("washing_machine", 3, 0.5)
 cleaning_robot = Appliance("cleaning_robot", 4, 0.3)
 surp = func_Surplus_predicted()
 
-Opt_app1 = Optimize()
-Opt_app2 = Optimize()
+Opt_app1 = Optimize(washing_machine)
 
-Opt_app1.Optimize_start_time(surp,washing_machine )
+Opt_app2 = Optimize(cleaning_robot)
+Opt_app1.Optimize_start_time(surp)
+
 washing_machine_new = washing_machine.TimeDep_fromStartTime(Opt_app1.first_good_starting_time)
+
 surplus2 = func_Surplus_predicted( washing_machine_new )
-print(Opt_app1.first_good_starting_time)
-#Opt_app2.Optimize_start_time(surplus2,cleaning_robot)
-#print(washing_machine_new)
-#find_best_hours is executed for all the possible times (24-timelength)
+print("Optimal time to start the {} is at {}h".format( Opt_app1.appliance.name,Opt_app1.first_good_starting_time))
+Opt_app2.Optimize_start_time(surplus2)
 
-#time_period = 
-
-#def find_best_hours(times):
-    
-
-
-
-
-
-#print("Minimum surplus = {} for starting the appliance between {}h and {}h ".format(surplus,indexlist[0], indexlist[len(indexlist)-1]))
-
-#time_guess = np.array([1])
-
-#res = optimize.minimize(func_Surplus_day, time_guess, method='nelder-mead',  options={'xtol': 1e-8, 'disp': True})
-#print(res.x)
-
+print("Optimal time to start the {} is at {}h".format( Opt_app2.appliance.name,Opt_app2.first_good_starting_time))
