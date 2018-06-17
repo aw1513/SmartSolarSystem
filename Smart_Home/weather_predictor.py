@@ -39,7 +39,7 @@ class WeatherPredictor():
 		
 		self.estimator.fit(train_ftrs, train_tgts)
 
-	def evaluate_estimator(self, lim = 6500):
+	def evaluate_estimator(self, lim = 6.5):
 
 		# create test prediction:
 		test_pred = self.estimator.predict(self.test_ftrs)
