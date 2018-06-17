@@ -34,21 +34,35 @@ def func_Surplus_predicted(appliance=np.zeros(24)):
 
 
 
-
+appliance_list = []
 #create the appliances
-washing_machine = Appliance("washing_machine", 3, 0.5)
-cleaning_robot = Appliance("cleaning_robot", 4, 0.3)
-surp = func_Surplus_predicted()
+washing_machine = Appliance("washing_machine", 3, 2.5)
+appliance_list.append(washing_machine)
+cleaning_robot = Appliance("cleaning_robot", 4, 5.3)
+
+
+surplus_before_wash = func_Surplus_predicted()
 
 Opt_app1 = Optimize(washing_machine)
 
 Opt_app2 = Optimize(cleaning_robot)
-Opt_app1.Optimize_start_time(surp)
+Opt_app1.Optimize_start_time(surplus_before_wash)
 
 washing_machine_new = washing_machine.TimeDep_fromStartTime(Opt_app1.first_good_starting_time)
 
 surplus2 = func_Surplus_predicted( washing_machine_new )
+
+
+x=np.arange(24)
+
+#plt.show()
+
+w = plt.step(x,surplus2)
+before = plt.step(x,surplus_before_wash)
+
+
 print("Optimal time to start the {} is at {}h".format( Opt_app1.appliance.name,Opt_app1.first_good_starting_time))
 Opt_app2.Optimize_start_time(surplus2)
 
 print("Optimal time to start the {} is at {}h".format( Opt_app2.appliance.name,Opt_app2.first_good_starting_time))
+plt.show()
