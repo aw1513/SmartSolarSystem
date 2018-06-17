@@ -169,7 +169,7 @@ class SmartHome():
         print('set up and trained weather predictor with data up to ', train_date)
 
         # initialize battery
-        self.battery_soc = 0.0 # initialize the state-of-charge of the battery
+        self.battery_soc = 0.3 # initialize the state-of-charge of the battery
         self.battery_capacity = battery_capacity
         self.battery_power = battery_power
         print('set up battery with capacity %.2f and maximum power %.2f' %(battery_capacity, battery_power))
@@ -186,7 +186,7 @@ class SmartHome():
         # initialize logger
         self.log_name = log_name
         write_row_to_csv( self.log_name, 
-                          ['timestamp', 'PV_production', 'load_consumption', 'battery_consumption', 'self_consumption'], 
+                          ['timestamp', 'PV_production', 'base_consumption', 'var_consumption', 'battery_consumption', 'self_consumption'], 
                           initialize = True )
 
         # set up current token value
@@ -213,57 +213,57 @@ class SmartHome():
 
     def update(self, timestamp):
 
-        # try:
-        if pd.to_datetime(self.last_timestamp).date() != pd.to_datetime(timestamp).date():
-            self.curr_token = 0
-            print('resetted current token')
+        try:
+            if pd.to_datetime(self.last_timestamp).date() != pd.to_datetime(timestamp).date():
+                self.curr_token = 0
+                print('resetted current token')
 
-        # evaluate_current_timestamp:
-        PV_production = self.get_weather_measurement(timestamp)
-        base_consumption = self.get_baseload_measurement(timestamp)
-        variable_consumption = self.var_load_optimizer.get_consumption()
-        print('current PV production: %.2fkWh' %PV_production)
-        print('current base consumption: %.2fkWh' %base_consumption)
-        print('current variable consumption: %.2fkWh' %variable_consumption)
+            # evaluate_current_timestamp:
+            PV_production = self.get_weather_measurement(timestamp)
+            base_consumption = self.get_baseload_measurement(timestamp)
+            variable_consumption = self.var_load_optimizer.get_consumption()
+            print('current PV production: %.2fkWh' %PV_production)
+            print('current base consumption: %.2fkWh' %base_consumption)
+            print('current variable consumption: %.2fkWh' %variable_consumption)
 
-        energy_surplus = PV_production - base_consumption - variable_consumption
-        battery_usage = self.update_battery(energy_surplus)
-        print('current battery usage: %.2fkWh' %battery_usage)
+            energy_surplus = PV_production - base_consumption - variable_consumption
+            battery_usage = self.update_battery(energy_surplus)
+            print('current battery usage: %.2fkWh' %battery_usage)
 
-        self_consumption = min(PV_production, base_consumption + variable_consumption + battery_usage)
-        print('total self consumption: %.2fkWh' %self_consumption)
+            self_consumption = min(PV_production, base_consumption + variable_consumption + battery_usage)
+            print('total self consumption: %.2fkWh' %self_consumption)
 
-        self.curr_token = self.curr_token + self_consumption
-        print('new token value for today: %.2f' %self.curr_token)
-        
-        write_row_to_csv( self.log_name, 
-                          [timestamp, PV_production, base_consumption+variable_consumption, battery_usage, self_consumption], 
-                         )
-        # predict for next timestamp:
-        predicted_production = self.predict_weather(timestamp)
-        predicted_baseload = self.predict_baseload(timestamp)
+            self.curr_token = self.curr_token + self_consumption
+            print('new token value for today: %.2f' %self.curr_token)
+            
+            write_row_to_csv( self.log_name, 
+                              [timestamp, PV_production, base_consumption, variable_consumption, battery_usage, self_consumption], 
+                             )
+            # predict for next timestamp:
+            predicted_production = self.predict_weather(timestamp)
+            predicted_baseload = self.predict_baseload(timestamp)
 
-        predicted_surplus = predicted_production - predicted_baseload
-        predicted_var_load = self.var_load_optimizer.optimize(predicted_surplus)
+            predicted_surplus = predicted_production - predicted_baseload
+            predicted_var_load = self.var_load_optimizer.optimize(predicted_surplus)
 
-        print('predicted all future loads')
+            print('predicted all future loads')
 
-        self.last_timestamp = timestamp
+            self.last_timestamp = timestamp
 
-        return {'PV_production'         : PV_production, 
-                'base_consumption'      : base_consumption,
-                'variable_consumption'  : variable_consumption,
-                'battery_usage'         : battery_usage,
-                'self_consumption'      : self_consumption, 
-                'token_value'           : self.curr_token,
-                'predicted_production'  : predicted_production,
-                'predicted_baseload'    : predicted_baseload,
-                'predicted_var_load'    : predicted_var_load, 
-                }
+            return {'PV_production'         : PV_production, 
+                    'base_consumption'      : base_consumption,
+                    'variable_consumption'  : variable_consumption,
+                    'battery_usage'         : battery_usage,
+                    'self_consumption'      : self_consumption, 
+                    'token_value'           : self.curr_token,
+                    'predicted_production'  : predicted_production,
+                    'predicted_baseload'    : predicted_baseload,
+                    'predicted_var_load'    : predicted_var_load, 
+                    }
 
-        # except:
-        #    print('failed to execute timestamp - skip to next one')
-        #    return 0
+        except:
+            print('failed to execute timestamp - skip to next one')
+            return 0
 
 
     def update_battery(self, energy_surplus):
