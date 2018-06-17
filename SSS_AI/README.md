@@ -1,6 +1,8 @@
 For demonstration purposes of using AI in our project Smart Solar Systems we used template https://startbootstrap.com/template-overviews/sb-admin/
 to show our results from Jupiter Notebook. This part would be developed via connection from Jupiter Notebook date via API to web page.
 
+After downloading the project open index.html file in your browser to see the result.
+
 
 # [Start Bootstrap - SB Admin](https://startbootstrap.com/template-overviews/sb-admin/)
 
