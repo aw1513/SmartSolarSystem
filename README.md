@@ -14,3 +14,6 @@ The SmartSolarSystem has a fully decentralised front-end and back-end with the f
 - The optimiser is an algorithm that minimises the surplus energy for the next 24h, which is equivalent to the difference between the predicted production and the self-consumption. A variety of electrical appliances are implemented, for example household devices and storage batteries. The algorithm will learn about the house owners base consumption as well as incorporate IoT information about the devices.
 - The SmartMeter delivers the actual self-consumption data in kWh which determines the amount of tokens transfered as a reward. The transactions are stored in a smart contract architecture consisting of three contracts deployed on the Ethereum blockchain: the network operator as the owner of the contract can trigger the registration of a house owner, the creation  of ERC20 standard tokens as well as the transfer of tokens to the house owner.
 - A front-end interface presents the information of the predictor, the optimiser, and the tokens to the house owner.
+
+## Testing the prototype:
+- Run the notebook "smart_home_driver" in the folder "Smart_Home" to see the system performance and outputs for the sample day of 15th August 2017. When running the scripts, a set of images are created in the same folder, that then serve as input to the web interface in the live system.
