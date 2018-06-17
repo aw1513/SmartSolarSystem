@@ -17,3 +17,6 @@ The SmartSolarSystem has a fully decentralised front-end and back-end with the f
 
 ## Testing the prototype:
 - Run the notebook "smart_home_driver" in the folder "Smart_Home" to see the system performance and outputs for the sample day of 15th August 2017. When running the scripts, a set of images are created in the same folder, that then serve as input to the web interface in the live system.
+- To test the optimizer, run python3 runOptimizer.py in the folder "Optimizer".
+- Test the blockchain prototype according to the instructions in [SSS_BC/README.me](SSS_BC/README.me)
+- The frond-end is described in [SSS_AI/README.me](SSS_AI/README.me)
